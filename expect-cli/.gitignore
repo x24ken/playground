@@ -15,6 +15,10 @@ dist-ssr
 # Claude Code ローカル設定
 .claude/settings.local.json
 
+# Playwright MCP / expect の実行アーティファクト
+.playwright-mcp/
+.expect/logs.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

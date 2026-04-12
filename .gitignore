@@ -1,0 +1,12 @@
+# Claude Code ローカル設定（コミットしない）
+.claude/settings.local.json
+
+# expect-cli などが git root に書き込む可能性のあるファイル群への防衛策
+# （実験ごとのサブディレクトリ配下なら問題ないが、ルートには残さない）
+/.agents/
+/.cursor/
+/.expect/
+/.gemini/
+/.vscode/
+/.mcp.json
+/.claude/skills/

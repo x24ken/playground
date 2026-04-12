@@ -6,4 +6,4 @@
 
 | ディレクトリ | 内容 | Issue |
 |---|---|---|
-| (予定) `expect-cli/` | AIエージェント向けブラウザテスト自動化 | [#1](https://github.com/x24ken/playground/issues/1) |
+| [`expect-cli/`](./expect-cli/) | AIエージェント向けブラウザテスト自動化（Expect + Playwright） | [#1](https://github.com/x24ken/playground/issues/1) |

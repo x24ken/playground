@@ -17,6 +17,16 @@ Issue: [#1](https://github.com/x24ken/playground/issues/1)
 - ✅ headed モード（既定）の動作確認
 - ✅ headless モード: `.mcp.json` の `env.EXPECT_HEADED=false` で切り替え
 - ❌ Cookie 抽出: 未成熟。Guest Profile を読みに行く・暗号化 Cookie の復号が不安定など、MCP モードでは実用的でない（upstream [#89](https://github.com/millionco/expect/issues/89), [#25](https://github.com/millionco/expect/issues/25) で認識済み）。代替として CDP モード（既存 Chrome に直接接続）が推奨されている
+- ⚠️ ビデオ録画: 設定不要で `/tmp/expect-artifacts/` に自動録画される。ただしファイル名がエポックミリ秒やハッシュのみでテスト内容と紐付けできず実用性は低い。また ffmpeg がバックグラウンドで暴走するバグ報告あり（[#97](https://github.com/millionco/expect/issues/97), [#98](https://github.com/millionco/expect/issues/98)）
+
+## 総評
+
+**コンセプトは良いが実用にはまだ早い**（2026-04 時点、v0.1.3）。
+
+- Star 3,379 / Fork 144（公開5週間）と注目度は高い
+- 「AIエージェントに自然文でブラウザテストを依頼できる」体験は魅力的
+- ただし init のバグ、Cookie抽出の未成熟、ffmpeg暴走、Playwright MCP との競合など、基本的なワークフローでもハマりポイントが多い
+- 開発は活発（Issue対応は早い）なので、数ヶ月後に再評価する価値あり
 
 ## ハマったポイント
 

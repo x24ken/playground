@@ -69,9 +69,9 @@ curl -sL https://raw.githubusercontent.com/millionco/expect/main/.agents/skills/
 
 `EXPECT_COOKIE_BROWSERS=Chrome` を指定しても、Default プロファイルではなく Guest Profile の Cookie DB を読みに行くため cookie_count: 0 になる。`EXPECT_PROFILE=Default` を指定しても改善せず。認証済みテストには CDP モード（`EXPECT_CDP_URL`）で既存 Chrome に接続する方法が推奨。
 
-### 6. MCP 設定の手動配置
+### 6. MCP 設定はサブディレクトリに手動複製が必要
 
-CLI のフローでうまく書き込まれない場合は手動で `.mcp.json` を配置:
+ハマりポイント1の通り、`expect-cli init` は git root に `.mcp.json` を書く。サブディレクトリで Claude Code を使う場合は手動で複製する:
 
 ```json
 {

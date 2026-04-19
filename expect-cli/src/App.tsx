@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -6,6 +6,12 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [cookies, setCookies] = useState(document.cookie)
+
+  useEffect(() => {
+    const id = setInterval(() => setCookies(document.cookie), 1000)
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <>
@@ -113,7 +119,12 @@ function App() {
       </section>
 
       <div className="ticks"></div>
-      <section id="spacer"></section>
+      <section id="cookie-display" style={{ padding: '1rem', textAlign: 'center' }}>
+        <h2>Cookies</h2>
+        <pre data-testid="cookie-value" style={{ background: '#1a1a2e', padding: '1rem', borderRadius: '8px' }}>
+          {cookies || '(no cookies)'}
+        </pre>
+      </section>
     </>
   )
 }

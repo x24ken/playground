@@ -16,7 +16,7 @@ Issue: [#1](https://github.com/x24ken/playground/issues/1)
 - ✅ Claude Code から「Vite アプリをブラウザでテストして」と依頼 → expect skill が自動起動 → MCP 経由で Chromium を立ち上げてカウンターボタンの動作を確認・コンソールエラーなしを検証
 - ✅ headed モード（既定）の動作確認
 - ✅ headless モード: `.mcp.json` の `env.EXPECT_HEADED=false` で切り替え
-- ⏳ Cookie 抽出未検証
+- ❌ Cookie 抽出: 未成熟。Guest Profile を読みに行く・暗号化 Cookie の復号が不安定など、MCP モードでは実用的でない（upstream [#89](https://github.com/millionco/expect/issues/89), [#25](https://github.com/millionco/expect/issues/25) で認識済み）。代替として CDP モード（既存 Chrome に直接接続）が推奨されている
 
 ## ハマったポイント
 
@@ -55,7 +55,11 @@ curl -sL https://raw.githubusercontent.com/millionco/expect/main/.agents/skills/
 
 ユーザー設定に Playwright MCP がある状態だと、Claude が expect MCP ではなく Playwright MCP を直接呼ぶことがある（SKILL.md に「raw browser tools を使うな」と書いてあっても）。明示的に「expect MCP で」と指示するか、プロジェクト単位で他ブラウザ MCP を無効化する。
 
-### 5. MCP 設定の手動配置
+### 5. Cookie 抽出は Guest Profile を読みに行く
+
+`EXPECT_COOKIE_BROWSERS=Chrome` を指定しても、Default プロファイルではなく Guest Profile の Cookie DB を読みに行くため cookie_count: 0 になる。`EXPECT_PROFILE=Default` を指定しても改善せず。認証済みテストには CDP モード（`EXPECT_CDP_URL`）で既存 Chrome に接続する方法が推奨。
+
+### 6. MCP 設定の手動配置
 
 CLI のフローでうまく書き込まれない場合は手動で `.mcp.json` を配置:
 

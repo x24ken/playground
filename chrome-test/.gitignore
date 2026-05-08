@@ -1,0 +1,5 @@
+# Playwright MCP の実行アーティファクト
+.playwright-mcp/
+
+# 動作確認時のスクリーンショット
+*.png

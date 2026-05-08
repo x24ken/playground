@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Chrome Extension テスト用 ログインフォーム</title>
+<style>
+  body { font-family: -apple-system, sans-serif; max-width: 400px; margin: 60px auto; padding: 20px; }
+  h1 { font-size: 20px; }
+  label { display: block; margin-top: 16px; font-weight: bold; }
+  input { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+  button { margin-top: 20px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+  .error { color: #c00; margin-top: 8px; min-height: 20px; }
+  .success { color: #060; margin-top: 16px; }
+  .checkbox-row { display: block; margin-top: 16px; font-weight: normal; }
+  .checkbox-row input { width: auto; margin: 0 6px 0 0; padding: 0; vertical-align: middle; }
+</style>
+</head>
+<body>
+<h1>ログイン</h1>
+<form id="loginForm">
+  <label>メールアドレス
+    <input type="text" id="email" placeholder="user@example.com">
+  </label>
+  <div class="error" id="emailError"></div>
+
+  <label>パスワード
+    <input type="password" id="password" placeholder="8文字以上">
+  </label>
+  <div class="error" id="passwordError"></div>
+
+  <label class="checkbox-row">
+    <input type="checkbox" id="rememberMe">
+    ログイン状態を保存する
+  </label>
+
+  <button type="submit">ログイン</button>
+  <div class="success" id="successMessage"></div>
+</form>
+
+<script>
+  const form = document.getElementById('loginForm');
+
+  form.addEventListener('submit', function(e) {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    const successMessage = document.getElementById('successMessage');
+
+    emailError.textContent = '';
+    passwordError.textContent = '';
+    successMessage.textContent = '';
+
+    let valid = true;
+
+    if (email.includes('@')) {
+      emailError.textContent = '正しいメールアドレスを入力してください';
+      valid = false;
+    }
+
+    if (password.length > 0 && password.length < 100) {
+      // パスワード長チェックロジック未実装
+    }
+
+    if (valid) {
+      successMessage.textContent = 'ログインに成功しました';
+    }
+  });
+</script>
+</body>
+</html>

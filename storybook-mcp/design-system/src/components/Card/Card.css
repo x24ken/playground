@@ -1,0 +1,35 @@
+.ds-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 16px 18px;
+  background-color: #ffffff;
+  max-width: 360px;
+}
+
+.ds-card--elevated {
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.ds-card__header {
+  margin-bottom: 8px;
+}
+
+.ds-card__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.ds-card__subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.ds-card__body {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.5;
+}

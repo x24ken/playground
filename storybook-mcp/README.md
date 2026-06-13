@@ -79,12 +79,31 @@ refs: {
 
 `get-documentation`（composition越しのButton）→ stories・props・JSDoc・import文まで完全取得。
 
+## 再利用デモ（MCPで発見 → API取得 → 再利用してUI生成）
+
+実際に「エージェントがMCPだけを根拠に既存コンポーネントを再利用する」流れを実演した成果が
+`app/src/screens/DashboardHeader.tsx`。
+
+1. `list-all-documentation` で既存コンポーネントを発見（Local 2 + Design System 3）
+2. `get-documentation` で各コンポーネントの props・型・import文を取得（新規発明の代わりに既存APIを把握）
+3. 取得したAPIだけを使って「ダッシュボードヘッダー画面」を組み立て：
+   - **Card / Button / Badge** … design-system（`import { Button } from "design-system"`）
+   - **SearchBar / StatChip** … app固有
+4. Storybook（`App/DashboardHeader`）で表示確認 → 既存のデザインシステムCSSのまま正しく描画
+
+新規にButtonやCardを発明せず、`variant` / `tone` / `delta` 等の正しいpropsで再利用できている点がポイント。
+
+> 補足: composition は Storybook UI / MCP 上での統合であり、実コードの依存解決とは別物。
+> このデモでは MCP が示す import 名 `"design-system"` を実ソースに解決するため、
+> `design-system/src/index.ts`（公開エントリ）と `app/.storybook/main.ts` の `viteFinal` alias を追加している。
+
 ## ハマりポイント
 
-1. **composition のコンポーネント詳細を取るには `storybookId` が必須。**
-   ローカルは `get-documentation({ id })` だけでよいが、composition越しのコンポーネントは
-   `get-documentation({ id, storybookId: 'design-system' })` のように、どのソースStorybookかを
-   `storybookId`（`refs` のキー）で指定する必要がある。`list-all-documentation` のセクション見出し（`id: design-system`）がそのキーに対応する。
+1. **composition が有効だと `get-documentation` は `storybookId` が常に必須になる。**
+   composition なしならローカルは `get-documentation({ id })` だけでよいが、`refs` を設定して
+   composition が有効になると、ローカルも含めて `storybookId` の指定が要る：
+   ローカルは `{ id, storybookId: 'local' }`、design-system は `{ id, storybookId: 'design-system' }`。
+   この `storybookId` は `list-all-documentation` のセクション見出し（`id: local` / `id: design-system`）に対応する。
 
 2. **`get-documentation` の引数キーは `componentId` ではなく `id`。**
    スキーマ違反時のエラーメッセージに正解（`id` / `storybookId`）が出るので、それを読めば解決できる。

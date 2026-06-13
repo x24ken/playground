@@ -1,0 +1,17 @@
+.dashboard-header__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.dashboard-header__search {
+  margin-bottom: 16px;
+}
+
+.dashboard-header__stats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}

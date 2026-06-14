@@ -1,0 +1,30 @@
+.app-searchbar {
+  display: flex;
+  gap: 8px;
+  max-width: 420px;
+}
+
+.app-searchbar__input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.app-searchbar__input:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: -1px;
+}
+
+.app-searchbar__submit {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}

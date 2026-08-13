@@ -4,9 +4,11 @@ description: >-
   Interview the user one question at a time to turn ambiguities into explicit
   decisions before implementation, prioritizing architecture-changing
   questions. Use when the user says "interview me", "访谈我",
-  "开工前把需求问清楚", "帮我把这个需求里的模糊点理清楚",
+  "インタビューして", "开工前把需求问清楚", "要件を1問ずつ聞いて",
+  "帮我把这个需求里的模糊点理清楚", "曖昧な点を質問して",
   "ask me clarifying questions" before starting, complains the requirements
-  are too vague to start ("需求太模糊没法干"), or wants pre-task Q&A.
+  are too vague to start ("需求太模糊没法干", "要件が曖昧で始められない"),
+  or wants pre-task Q&A.
   Not when the user merely permits
   questions while working ("有不确定的可以问我", "ask me if unclear") —
   permission for later is not an interview now. Not for interview practice

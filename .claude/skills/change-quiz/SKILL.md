@@ -4,8 +4,9 @@ description: >-
   Generate one droppable self-contained HTML report (never a Cursor
   canvas) explaining a change set, ending with a quiz the user must pass
   before merging. Use when the user says "quiz me", "考考我",
-  "change quiz", "变更测验", or, after a large change or session, wants
-  to verify they truly understand it — e.g. "merge 之前考考我这轮改动",
+  "クイズして", "change quiz", "变更测验", "変更クイズ", or, after a
+  large change or session, wants to verify they truly understand it —
+  e.g. "merge 之前考考我这轮改动", "マージ前に理解度クイズして",
   or says "review" meaning their own understanding, not bug-finding. The
   audience is the user themselves — selling it to reviewers is
   pitch-explainer; finding bugs is a code review. Not for writing tests

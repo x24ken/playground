@@ -4,9 +4,11 @@ description: >-
   Surface the user's unknown unknowns before they start work in an unfamiliar
   area (new codebase area, domain, or tool). Produces a read-only blindspot
   briefing plus advice on how to prompt better. Use when the user says
-  "blindspot pass", "盲区扫描", "unknown unknowns", asks what they don't know
+  "blindspot pass", "盲区扫描", "盲点パス", "盲点を洗い出して",
+  "unknown unknowns", asks what they don't know
   or might miss before diving in, says "我刚接手这块代码",
-  "开工前帮我看看有什么坑", or merely describes facing unfamiliar territory —
+  "开工前帮我看看有什么坑", "何も知らないので落とし穴を教えて",
+  "着手前に地雷がないか見て", or merely describes facing unfamiliar territory —
   the statement is the request. Not for finished or pre-merge work (use
   change-quiz), nor for interviewing the user (use interview-me); mixed
   requests start here — brief, then hand off.

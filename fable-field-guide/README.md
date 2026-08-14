@@ -96,6 +96,15 @@ mkdir -p ~/.claude/hooks/fable-field-guide && cp ~/playground/fable-field-guide/
 }
 ```
 
+### チェーン通し試験（2026-08-13〜14、dojoで完走）
+
+**blindspot-pass → interview-me → 実装 → change-quiz → pitch-explainer の5連チェーンが機能した。**
+
+- interview-me: 決定記録の型（選択—なぜ—代替案—依存）を遵守。revertコミットの注意3点を「交渉不可の技術制約」として決定と区別。blindspot passの発見（db.jsのトランザクションFIXME）が「クーポンとポイントは完全独立」という設計判断に直結
+- 実装: revertの教訓3点をすべて反映（`jstEndOfDayMs()` によるUTCミリ秒比較、Idempotency-Key、`flags.coupons` ゲート付きリリース）。テスト5→13本
+- change-quiz: 全問が「diffだけでは答えられない」相互作用型（事故の根本原因、冪等リトライ、規約7条との絡み、退会会員、フラグoff時の挙動）
+- 生成物（interview-decisions.md / change-report.html / coupon-explainer.html）は3つとも `.git/info/exclude` に自動登録され、変更セットに混ざらない仕様が機能
+
 ## 次にやること（ユーザーの対話が必要）
 
 - [ ] **チェーン通し試験**: 対話セッションで `blindspot-pass → interview-me → 実装 → change-quiz` を1タスク通す。例：

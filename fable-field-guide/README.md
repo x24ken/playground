@@ -64,6 +64,38 @@ plugin ではなくスキルコピー方式を採用。issueの「絞る」案�
 
 **11/14直撃＋2部分＋見逃し1**で合格級。最重要のrevert履歴は「新機能ではなく事故機能の再実装が本当のタスク」というフレーミングで完璧に発見。見逃した#6（ランク改定のマーケ承認）はクーポン非直撃であり「トリビアは省く」ルール通りの取捨。さらに**答え合わせ表に無い盲点を3つ自力発見**した（旧実装がルート未配線のままrevertされた事実／退会会員がクーポンを使える穴／todayJstとtoUtcDateStringの日付ズレ）。仕込んだ盲点の「検出」を超えて、盲点同士を突き合わせた推論が働いている。
 
+## 全9スキル＋フックの導入（2026-08-14）
+
+残り6スキル（field-guide / design-directions / reference-hunt / implementation-plan / implementation-notes / pitch-explainer）も日本語トリガーを追記して `~/.claude/skills/` と `~/.cursor/skills/` に配置し、**全9スキルがグローバルで有効**になった。
+
+さらに元リポジトリのフック2種を [`hooks/`](./hooks/) に用意（trigger-sentinel は日本語フレーズ対応済み・動作確認済み）：
+
+- `trigger-sentinel.sh` — UserPromptSubmit。トリガーフレーズ検知で該当スキルの使用を1行注入（発動の決定論化）
+- `merge-gate.sh` — PreToolUse(Bash)。`git merge` 検知でクイズ未合格を注意喚起（オプトイン: `FABLE_MERGE_GATE=1` か `.claude/fable-merge-gate`）
+
+インストール（スクリプト設置は権限上ユーザーが実行する）：
+
+```bash
+mkdir -p ~/.claude/hooks/fable-field-guide && cp ~/playground/fable-field-guide/hooks/*.sh ~/.claude/hooks/fable-field-guide/ && chmod +x ~/.claude/hooks/fable-field-guide/*.sh
+```
+
+その後 `~/.claude/settings.json` の `hooks` に以下をマージ：
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      { "matcher": "*", "hooks": [
+        { "type": "command", "command": "$HOME/.claude/hooks/fable-field-guide/trigger-sentinel.sh", "timeout": 3 } ] }
+    ],
+    "PreToolUse": [
+      { "matcher": "Bash", "hooks": [
+        { "type": "command", "command": "$HOME/.claude/hooks/fable-field-guide/merge-gate.sh", "timeout": 3 } ] }
+    ]
+  }
+}
+```
+
 ## 次にやること（ユーザーの対話が必要）
 
 - [ ] **チェーン通し試験**: 対話セッションで `blindspot-pass → interview-me → 実装 → change-quiz` を1タスク通す。例：

@@ -9,9 +9,4 @@
 /.gemini/
 /.vscode/
 /.mcp.json
-/.claude/skills/*
-
-# fable-field-guide 実験 (#14) で意図して入れたスキルは追跡する
-!/.claude/skills/blindspot-pass/
-!/.claude/skills/interview-me/
-!/.claude/skills/change-quiz/
+/.claude/skills/

@@ -116,6 +116,12 @@ mkdir -p ~/.claude/hooks/fable-field-guide && cp ~/playground/fable-field-guide/
 
 planモードとの関係も整理できた: planモードは「書き込み禁止＋承認ゲート」の仕組み、implementation-planは「計画書の中身の規律（決定事項先頭・ファイルとして残す・チェーン接続）」でレイヤーが違い、併用が作者想定（スキルdescriptionに明記）。pitch-explainerがPR説明文でなく自己完結HTMLなのは、PRを開かない読者（マーケ等の承認者）とPRが存在しない仕事（原典例: 動画編集）を想定した設計。レビュアーが全員GitHub住民なら同じ構成でPR本文に書くのが正しいローカライズ。
 
+### 3周目：reference-hunt / design-directions / field-guide（2026-08-16、これで全9スキル完走）
+
+- **reference-hunt**（express-rate-limit → dojoに移植）: 掟どおり `express-rate-limit@8.6.2`(MIT) の**実ソース4ファイル＋テストを読了**し、持っていく意味論を5次元（入力/出力/状態遷移/エッジ/失敗）で implementation-notes に記録してから依存ゼロで再実装（porting-checklist.md が無いのは「即実装ならnotesに書く」という仕様どおりの分岐）。深い意味論まで拾った：**429もカウントに含める**「数えてから判定」、期限切れ「後の次ヒット」で巻き直す固定窓、previous/current 2枚Mapの一括破棄（本家MemoryStoreの走査回避と同じ）、IPv4-mapped IPv6の剥がし、IPv6の/56丸め。白眉は**既存idempotencyとの合成**——素直に重ねると「再送が429を食う」か「429が冪等キャッシュされ永久429」のどちらかになる衝突を、参照実装のskipオプションで解いた。逸脱（JSONエラーボディ、ipKey簡易化）と未対応エッジも明記
+- **design-directions**: 私（メインセッション）が先走って4案作成→ユーザー指摘で `design-directions-claude/` に退避。dojoでのユーザー実行と比較予定のまま
+- **field-guide ルーター**: あえて曖昧に「何か機能足したい、何から手をつければ分からない」と投げる試験。field-guide→「決めごとが未確定＝known unknowns」と正しく分類→interview-me に接続。4問（何を作るか→ページング→レスポンス形→フィルタ）を影響順に聞き、履歴照会APIの決定記録を生成。**期間フィルタを「このリポ頻出のTZ論点を持ち込むから先送り」と理由づけ**（過去周回の知見が判断に流入）、`reason` にサポートの調整メモが露出する点を⚠️で指摘、未コミットのレートリミット変更を先にコミットせよという衛生面の指摘まで出た
+
 ## 次にやること（ユーザーの対話が必要）
 
 - [ ] **チェーン通し試験**: 対話セッションで `blindspot-pass → interview-me → 実装 → change-quiz` を1タスク通す。例：

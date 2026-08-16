@@ -73,7 +73,7 @@ plugin ではなくスキルコピー方式を採用。issueの「絞る」案�
 - `trigger-sentinel.sh` — UserPromptSubmit。トリガーフレーズ検知で該当スキルの使用を1行注入（発動の決定論化）
 - `merge-gate.sh` — PreToolUse(Bash)。`git merge` 検知でクイズ未合格を注意喚起（オプトイン: `FABLE_MERGE_GATE=1` か `.claude/fable-merge-gate`）
 
-インストール（スクリプト設置は権限上ユーザーが実行する）：
+**2026-08-16 インストール完了**（スクリプトは `~/.claude/hooks/fable-field-guide/` に設置、`~/.claude/settings.json` に登録済み。両フックともpipeテストで発火確認済み。反映は新セッションから）。手順の記録：
 
 ```bash
 mkdir -p ~/.claude/hooks/fable-field-guide && cp ~/playground/fable-field-guide/hooks/*.sh ~/.claude/hooks/fable-field-guide/ && chmod +x ~/.claude/hooks/fable-field-guide/*.sh

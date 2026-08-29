@@ -8,3 +8,4 @@
 |---|---|---|
 | [`expect-cli/`](./expect-cli/) | AIエージェント向けブラウザテスト自動化（Expect + Playwright） | [#1](https://github.com/x24ken/playground/issues/1) |
 | [`storybook-mcp/`](./storybook-mcp/) | Storybook MCP for React（composition で2つのStorybookを統合しMCP経由で参照） | [#9](https://github.com/x24ken/playground/issues/9) |
+| [`fable-field-guide/`](./fable-field-guide/) | fable-field-guide-skills（blindspot pass等）を試す：素のプロンプト vs スキル版の比較実験 | [#14](https://github.com/x24ken/playground/issues/14) |
